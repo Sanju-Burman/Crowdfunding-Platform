@@ -1,20 +1,22 @@
-import CampaignWizard from "./components/CampaignCreationWizard"
-
-
+import { useState } from "react"
+import CampaignWizard from "./components/campaignWizard"
+import { Login, Signup } from "./components/auth";
 function App() {
+  const [isAuth, setIsAuth] = useState(false);
 
   return (
     <>
-      <div>
-        <div className="progress-bar">
-          <div className="step active">Home</div>
-          <div className="step">1. Basic Details</div>
-          <div className="step">2. Media Upload</div>
-          <div className="step">3. Milestones & Goals</div>
-          <div className="step">4. Preview</div>
-        </div>
-        <CampaignWizard/>
-      </div>
+      {
+        !isAuth ? (
+          <>
+            <Login setIsAuth={setIsAuth} />
+            <Signup />
+          </>
+        ) : (
+          <CampaignWizard />
+        
+        )
+      }
     </>
   )
 }
